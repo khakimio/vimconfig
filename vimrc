@@ -8,54 +8,75 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'bdchd/neoformat'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
-Plug 'Shougo/deoplete.nvim' , { 'do': ':UpdateRemotePlugins'  }
+Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'ycm-core/YouCompleteMe'
+Plug 'arcticicestudio/nord-vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
+let g:user_emmet_leader_key=','
 let g:mapleader=','
 set number
+colorscheme gruvbox
 set noswapfile 
 set tabstop=2
 set expandtab
+set shiftwidth=2
+set smarttab
 set hlsearch
 set incsearch
-
 syntax on
 set background=dark
+set guifont=ProggyCleanTT\ 12
 
-set noerrorbells                " No beeps
-set number                      " Show line numbers
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-set showcmd                     " Show me what I'm typing
-set showmode                    " Show current mode.
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
 
-set noswapfile                  " Don't use swapfile
-set nobackup                    " Don't create annoying backup files
-set nowritebackup
-set splitright                  " Split vertical windows right to the current windows
-set splitbelow                  " Split horizontal windows below to the current windows
-set hidden
-set ruler                       " Show the cursor position all the time
-
-set noshowmode                  " We show the mode with airline or lightline
-set incsearch                   " Shows the match while typing
-set hlsearch                    " Highlight found searches
-set ignorecase                  " Search case insensitive...
-set smartcase                   " ... but not when search pattern contains upper case characters
-
-set ttyfast
-set conceallevel=0
-set wrap
-set formatoptions=qrn1
-set autoindent
-set showmatch
-set smarttab
-set shiftwidth=2
-set guifont=Monaco:h20
-
-colorscheme gruvbox
+let g:airline_theme='ouo'
 map <C-n> :NERDTreeToggle<CR>
 map <Leader> <Plug>(easymotion-prefix)
 
+
+map <C-h> :call WinMove('h')<cr>
+map <C-j> :call WinMove('j')<cr>
+map <C-k> :call WinMove('k')<cr>
+map <C-l> :call WinMove('l')<cr>
+
+" Window movement shortcuts
+" move to the window in the direction shown, or create a new window
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+
+if has('python')
+  let g:jedi#force_py_version = 2
+  let g:syntastic_python_python_exec = 'python2'
+  let g:pymode_python = 'python2'
+elseif has('python3')
+  let g:jedi#force_py_version = 3
+  let g:syntastic_python_python_exec = 'python3'
+  let g:pymode_python = 'python3'
+else
+  let g:loaded_jedi = 1
+endif
