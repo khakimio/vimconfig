@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
 Plug 'storyn26383/vim-vue'
-Plug 'morhetz/gruvbox'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
@@ -14,16 +13,21 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'ycm-core/YouCompleteMe'
-Plug 'arcticicestudio/nord-vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'preservim/nerdcommenter'
-
+Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
+Plug 'elzr/vim-json'
+Plug 'othree/html5.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'morhetz/gruvbox'
+Plug 'zxqfl/tabnine-vim'
 call plug#end()
 
+colorscheme gruvbox
 let g:user_emmet_leader_key=','
 let g:mapleader=','
 set number
-colorscheme gruvbox
 set noswapfile 
 set tabstop=2
 set expandtab
@@ -31,10 +35,10 @@ set shiftwidth=2
 set smarttab
 set hlsearch
 set incsearch
+set mouse=a
 syntax on
-set background=dark
-set guifont=ProggyCleanTT\ 12
 
+let NERDTreeShowHidden=1
 let g:ale_fixers = {
  \ 'javascript': ['eslint']
  \ }
