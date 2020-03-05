@@ -27,14 +27,18 @@ else
   call minpac#add('easymotion/vim-easymotion')
   call minpac#add('tpope/vim-surround')
   call minpac#add('jiangmiao/auto-pairs')
-  call minpac#add('dense-analysis/ale')
+  call minpac#add('w0rp/ale')
   call minpac#add('jiangmiao/auto-pairs')
   call minpac#add('ycm-core/YouCompleteMe')
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
   
-"  call minpac#add('vim-airline/vim-airline')
-"  call minpac#add('vim-airline/vim-airline-themes')
+  call minpac#add('ycm-core/YouCompleteMe', { 'do': './install.py' })
+  call minpac#add('kien/ctrlp.vim')
+  call minpac#add('posva/vim-vue')
+  call minpac#add('morhetz/gruvbox')
   
-  
+
   " minpac utility commands
   command! PackUpdate call minpac#update()
   command! PackClean call minpac#clean()
@@ -42,9 +46,13 @@ else
 
 endif
 
+colorscheme gruvbox
+set background=dark
 set number
 set noswapfile
 set mouse=a
+
+let g:airline_powerline_fonts = 1
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -68,11 +76,7 @@ set nobackup
 set nowritebackup
 set nowb
 set noswapfile
-
 set showcmd       " display incomplete commands
-
-" Use one space, not two, after punctuation.
-" set nojoinspaces
 
 " set softtabstop=4
 set expandtab
