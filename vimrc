@@ -14,7 +14,6 @@ else
   call minpac#add('preservim/nerdtree')
   call minpac#add('Xuyuanp/nerdtree-git-plugin')
   call minpac#add('tiagofumo/vim-nerdtree-syntax-highlight')
-  call minpac#add('dense-analysis/ale')
   call minpac#add('jiangmiao/auto-pairs')
   call minpac#add('prettier/vim-prettier', { 'do': 'yarn install' })
   call minpac#add('kien/ctrlp.vim')
@@ -25,7 +24,12 @@ else
   call minpac#add('itchyny/lightline.vim')
   call minpac#add('preservim/nerdcommenter')
   call minpac#add('neovimhaskell/haskell-vim')
-  call minpac#add('Valloric/YouCompleteMe')
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+  call minpac#add('easymotion/vim-easymotion')
+  call minpac#add('eraserhd/parinfer-rust')
+  call minpac#add('wlangstroth/vim-racket')
+  call minpac#add('SirVer/ultisnips')
+  call minpac#add('honza/vim-snippets')
   
   " Minpac utility commands
   command! PackUpdate call minpac#update()
@@ -33,34 +37,47 @@ else
   command! PackStatus call minpac#status()
 endif
 
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 if !has('gui_running')
   set t_Co=256
 endif
 
-let g:NERDTreeIgnore = ['^node_modules$']
-let mapleader = ','
+set ttyfast
+set lazyredraw
 
-" ALE
-let g:ale_fix_on_save = 1
-let b:ale_fixers = ['prettier', 'eslint']
-"let g:ale_completion_enabled = 1
+let g:NERDTreeIgnore = ['^node_modules$']
+let g:mapleader = ','
+map <Leader> <Plug>(easymotion-prefix)
 
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 colorscheme gruvbox
+set termguicolors     " enable true colors support
+
+" These lines make vim load various plugins
+filetype on
+filetype indent on
+filetype plugin on
+
 set background=dark
 set number
+set ignorecase
 set mouse=a
 set cursorline
 set nowrap
 set nobackup
 set nowritebackup
-set nowb
+set nowb 
 set noswapfile
 set expandtab
 set softtabstop=2
 set shiftwidth=2
+set updatetime=300
 
 let NERDTreeShowHidden = 1
 
